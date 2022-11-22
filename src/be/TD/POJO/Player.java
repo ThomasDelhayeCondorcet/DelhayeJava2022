@@ -1,27 +1,54 @@
 package be.TD.POJO;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Player extends User implements Serializable{
 
 	private static final long serialVersionUID = -8384386959180789873L;
 	private int credit;
 	private String pseudo;
-	private Date registrayionDate;
-	private Date dateOfBirth;
+	private String email;
+	private String adress;
+	private LocalDate registrationDate;
+	private LocalDate dateOfBirth;
 	private ArrayList<Booking> bookings;
 	private ArrayList<Copy> copys;
 	private ArrayList<Loan> loan;
 	private ArrayList<Loan> borrow;
 	
-	public Player(String username, String password, int credit, String pseudo, Date registrayionDate,Date dateOfBirth) {
-		super(username, password);
+	public Player(int id, String username, String password , int credit, String pseudo, LocalDate registrayionDate,LocalDate dateOfBirth) {
+		super(id, username, password);
 		this.credit = credit;
 		this.pseudo = pseudo;
-		this.registrayionDate = registrayionDate;
+		this.registrationDate = registrayionDate;
 		this.dateOfBirth = dateOfBirth;
+	}
+	
+	public Player(String username, String password, String pseudo, LocalDate registrationDate,LocalDate dateOfBirth, String email, String adress ) {
+		super(username, password);
+		this.pseudo = pseudo;
+		this.registrationDate = registrationDate;
+		this.dateOfBirth = dateOfBirth;
+		this.email = email;
+		this.adress = adress;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAdress() {
+		return adress;
+	}
+
+	public void setAdress(String adress) {
+		this.adress = adress;
 	}
 
 	public int getCredit() {
@@ -40,19 +67,19 @@ public class Player extends User implements Serializable{
 		this.pseudo = pseudo;
 	}
 
-	public Date getRegistrayionDate() {
-		return registrayionDate;
+	public LocalDate getRegistrationDate() {
+		return registrationDate;
 	}
 
-	public void setRegistrayionDate(Date registrayionDate) {
-		this.registrayionDate = registrayionDate;
+	public void setRegistrationDate(LocalDate registrayionDate) {
+		this.registrationDate = registrayionDate;
 	}
 
-	public Date getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
@@ -95,10 +122,4 @@ public class Player extends User implements Serializable{
 	public void AddBirthdayBonus() {
 		
 	}
-	
-	@Override
-	public void Login() {
-		
-	}
-
 }
