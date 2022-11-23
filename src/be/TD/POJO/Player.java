@@ -18,10 +18,11 @@ public class Player extends User implements Serializable{
 	private ArrayList<Loan> loan;
 	private ArrayList<Loan> borrow;
 	
-	public Player(int id, String username, String password , int credit, String pseudo, LocalDate registrayionDate,LocalDate dateOfBirth) {
+	public Player(int id, String username, String password , int credit, String pseudo, LocalDate registrayionDate,LocalDate dateOfBirth, String email, String adress) {
 		super(id, username, password);
 		this.credit = credit;
 		this.pseudo = pseudo;
+		this.email = email;
 		this.registrationDate = registrayionDate;
 		this.dateOfBirth = dateOfBirth;
 	}

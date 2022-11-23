@@ -48,8 +48,8 @@ public abstract class User implements Serializable{
 	public User Login(String pseudo, String password) {
 		DaoFactory daoFactory= new DaoFactory();
 		DAO<User> userDao = daoFactory.getUserDAO();
+		return ((UserDAO) userDao).find(pseudo, password);
 		
-		return null;
 	}
 
 	public boolean Register(Player user) {
