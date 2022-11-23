@@ -41,7 +41,7 @@ public class UserDAO extends DAO<User> {
 	
 	public User find(String pseudo, String password) {
 		User user = null;
-		String query ="Select * From User Where Pseudo= and "+ pseudo + " and Password = " + password;
+		String query ="Select * From User Where Pseudo= '"+ pseudo + "' and Password = '" + password+ "'";
 		try{
 			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(query);
 			if(result.first()) {

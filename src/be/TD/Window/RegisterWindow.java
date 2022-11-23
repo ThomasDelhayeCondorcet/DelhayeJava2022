@@ -168,10 +168,6 @@ public class RegisterWindow {
 					}
 				}	
 			}
-			public void ChangeFrame(Frame window){
-				window.setVisible(true);
-				frame.dispose();
-			}
 		});
 		bt_confirm.setBounds(164, 292, 89, 23);
 		frame.getContentPane().add(bt_confirm);
@@ -183,13 +179,13 @@ public class RegisterWindow {
 				JFrame nextFrame=next.frame;
 				ChangeFrame(nextFrame);
 			}
-			
-			public void ChangeFrame(Frame window){
-				window.setVisible(true);
-				frame.dispose();
-			}
 		});
 		btnNewButton_1.setBounds(163, 341, 89, 23);
 		frame.getContentPane().add(btnNewButton_1);
+	}
+	
+	public void ChangeFrame(Frame window){
+		window.setVisible(true);
+		frame.dispose();
 	}
 }

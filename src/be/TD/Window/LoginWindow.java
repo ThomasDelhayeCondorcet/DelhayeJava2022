@@ -5,7 +5,13 @@ import java.awt.Frame;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
+
+import be.TD.POJO.Administrator;
+import be.TD.POJO.Player;
+import be.TD.POJO.User;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
@@ -64,7 +70,7 @@ public class LoginWindow {
 		frame.getContentPane().add(tf_pseudo);
 		tf_pseudo.setColumns(10);
 		
-		tf_password = new JTextField();
+		tf_password = new JPasswordField();
 		tf_password.setColumns(10);
 		tf_password.setBounds(26, 133, 113, 20);
 		frame.getContentPane().add(tf_password);
@@ -73,19 +79,35 @@ public class LoginWindow {
 		lb_password.setBounds(26, 108, 83, 14);
 		frame.getContentPane().add(lb_password);
 		
+		JLabel lb_error = new JLabel("");
+		lb_error.setForeground(Color.RED);
+		lb_error.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_error.setBounds(10, 162, 414, 14);
+		frame.getContentPane().add(lb_error);
+		
 		JButton bt_login = new JButton("Login");
 		bt_login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(tf_pseudo.getText().equals("")|| tf_password.getText().equals("")) {
+					lb_error.setText("All field must be fill");
+				}
+				Object connected = User.Login(tf_pseudo.getText(), tf_password.getText());
+				if(connected instanceof Player) {
+					PlayerMainPage next = new PlayerMainPage();
+					JFrame nextFrame=next.frmPlayerMainPage;
+					ChangeFrame(nextFrame);
+				}
+				if(connected instanceof Administrator) {
+					AdministratorMainPage next = new AdministratorMainPage();
+					JFrame nextFrame=next.frmAdministartorMainPage;
+					ChangeFrame(nextFrame);
+				}else {
+					lb_error.setText("Password or pseudo are incorrect");
+				}		
 			}
 		});
 		bt_login.setBounds(167, 187, 89, 23);
 		frame.getContentPane().add(bt_login);
-		
-		JLabel lb_error = new JLabel("");
-		lb_error.setForeground(Color.RED);
-		lb_error.setHorizontalAlignment(SwingConstants.CENTER);
-		lb_error.setBounds(127, 162, 165, 14);
-		frame.getContentPane().add(lb_error);
 		
 		JButton bt_register = new JButton("Register");
 		bt_register.addActionListener(new ActionListener() {
@@ -95,13 +117,12 @@ public class LoginWindow {
 				ChangeFrame(nextFrame);
 			}
 			
-			public void ChangeFrame(Frame window){
-				window.setVisible(true);
-				frame.dispose();
-			}
-			
 		});
 		bt_register.setBounds(167, 227, 89, 23);
 		frame.getContentPane().add(bt_register);
+	}
+	public void ChangeFrame(Frame window){
+		window.setVisible(true);
+		frame.dispose();
 	}
 }
