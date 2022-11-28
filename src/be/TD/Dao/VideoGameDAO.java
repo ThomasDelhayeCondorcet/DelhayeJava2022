@@ -1,6 +1,7 @@
 package be.TD.Dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -31,7 +32,23 @@ public class VideoGameDAO extends DAO<VideoGame>{
 
 	@Override
 	public boolean update(VideoGame obj) {
-		// TODO Auto-generated method stub
+		boolean success = false;
+		
+		String query ="Update VideoGame Set Price = '" + obj.getCreditCost() + "' Where Id = '" + obj.getId() + "'";
+		
+		try {
+			PreparedStatement stmt = this.connect.prepareStatement(query);
+			
+			stmt.executeUpdate();
+			stmt.close();
+			success = true;
+			return success;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return false;
 	}
 

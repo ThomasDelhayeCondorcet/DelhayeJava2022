@@ -86,6 +86,12 @@ public class VideoGame implements Serializable{
 		DAO<VideoGame> VideoGameDao = daoFactory.getVideoGameDAO();
 		return ((VideoGameDAO) VideoGameDao).findAll();
 	}
+
+	public boolean UpdateCost(VideoGame videoGame) {
+		DaoFactory daoFactory= new DaoFactory();
+		DAO<VideoGame> VideoGameDao = daoFactory.getVideoGameDAO();
+		return VideoGameDao.update(videoGame);
+	}
     
     
 	
