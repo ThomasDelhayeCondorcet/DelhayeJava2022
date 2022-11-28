@@ -98,7 +98,7 @@ public class LoginWindow {
 					ChangeFrame(nextFrame);
 				}
 				if(connected instanceof Administrator) {
-					AdministratorMainPage next = new AdministratorMainPage();
+					AdministratorMainPage next = new AdministratorMainPage(connected);
 					JFrame nextFrame=next.frmAdministartorMainPage;
 					ChangeFrame(nextFrame);
 				}else {

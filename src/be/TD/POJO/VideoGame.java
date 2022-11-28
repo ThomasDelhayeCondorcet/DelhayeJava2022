@@ -1,21 +1,36 @@
 package be.TD.POJO;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
+
+import be.TD.Dao.DAO;
+import be.TD.Dao.DaoFactory;
+import be.TD.Dao.VideoGameDAO;
 
 public class VideoGame implements Serializable{
 
 	private static final long serialVersionUID = 1906612796673826900L;
+	private int id;
     private String name;
     private String creditCost;
     private String console;
     private ArrayList<Booking>bookings;
     private ArrayList<Copy> copys;
     
-    public VideoGame(String name, String creditCost, String console) {
+    public VideoGame(int id, String name, String creditCost, String console) {
+    	this.id = id;
 		this.name = name;
 		this.creditCost = creditCost;
 		this.console = console;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -65,6 +80,18 @@ public class VideoGame implements Serializable{
     public void SelectBooking() {
     	
     }
+
+	public static ArrayList<VideoGame> GetAll() {
+		DaoFactory daoFactory= new DaoFactory();
+		DAO<VideoGame> VideoGameDao = daoFactory.getVideoGameDAO();
+		return ((VideoGameDAO) VideoGameDao).findAll();
+	}
+
+	public boolean UpdateCost(VideoGame videoGame) {
+		DaoFactory daoFactory= new DaoFactory();
+		DAO<VideoGame> VideoGameDao = daoFactory.getVideoGameDAO();
+		return VideoGameDao.update(videoGame);
+	}
     
     
 	
