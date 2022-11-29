@@ -93,7 +93,7 @@ public class LoginWindow {
 				}
 				Object connected = User.Login(tf_pseudo.getText(), tf_password.getText());
 				if(connected instanceof Player) {
-					PlayerMainPage next = new PlayerMainPage();
+					PlayerMainPage next = new PlayerMainPage(connected);
 					JFrame nextFrame=next.frmPlayerMainPage;
 					ChangeFrame(nextFrame);
 				}

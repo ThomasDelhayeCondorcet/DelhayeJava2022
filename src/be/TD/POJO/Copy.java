@@ -2,6 +2,9 @@ package be.TD.POJO;
 
 import java.io.Serializable;
 
+import be.TD.Dao.DAO;
+import be.TD.Dao.DaoFactory;
+
 public class Copy implements Serializable{
 	
 	private static final long serialVersionUID = -4587535549659348913L;
@@ -49,5 +52,11 @@ public class Copy implements Serializable{
 	
 	public boolean IsAvailable() {
 		return false;
+	}
+
+	public boolean AddCopy(Copy copy) {
+		DaoFactory daoFactory= new DaoFactory();
+		DAO<Copy> copyrDao = daoFactory.getCopyDAO();
+		return copyrDao.create(copy);
 	}
 }
