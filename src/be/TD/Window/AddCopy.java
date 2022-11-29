@@ -1,6 +1,7 @@
 package be.TD.Window;
 
 import java.awt.EventQueue;
+import java.awt.Frame;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -15,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class AddCopy {
 
@@ -47,6 +50,7 @@ public class AddCopy {
 	public AddCopy(Player player) {
 		// TODO Auto-generated constructor stub
 		this.player = player;
+		initialize();
 	}
 
 	/**
@@ -58,6 +62,12 @@ public class AddCopy {
 		frmAddCopy.setBounds(100, 100, 450, 300);
 		frmAddCopy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAddCopy.getContentPane().setLayout(null);
+		
+		JLabel lb_error = new JLabel("");
+		lb_error.setForeground(Color.RED);
+		lb_error.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_error.setBounds(10, 122, 414, 14);
+		frmAddCopy.getContentPane().add(lb_error);
 		
 		ArrayList<VideoGame> videoGames = VideoGame.GetAll();
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
@@ -83,6 +93,13 @@ public class AddCopy {
 				for(VideoGame videoGame : videoGames) {
 					if(videoGame.getName().equals(splitresult[0]) && videoGame.getConsole().equals(splitresult[1]) ) {
 						Copy copy = new Copy(videoGame, player );
+						if(copy.AddCopy(copy)) {
+							PlayerMainPage next = new PlayerMainPage(player);
+							JFrame nextFrame=next.frmPlayerMainPage;
+							ChangeFrame(nextFrame);
+						}else {
+							lb_error.setText("Impossible to add in the DB");
+						}
 						
 					}
 				}
@@ -90,5 +107,11 @@ public class AddCopy {
 		});
 		bt_add_copy.setBounds(174, 147, 89, 23);
 		frmAddCopy.getContentPane().add(bt_add_copy);
+		
+	}
+
+	public void ChangeFrame(Frame window){
+		window.setVisible(true);
+		frmAddCopy.dispose();
 	}
 }
