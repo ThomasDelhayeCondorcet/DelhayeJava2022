@@ -67,7 +67,7 @@ public class ModifyGameCost {
 		};
 		myModel.setColumnIdentifiers(colName);
 		for(VideoGame videoGame : videoGames) {
-			Object rows[] = new Object[videoGames.size()];
+			Object rows[] = new Object[colName.length];
 			rows[0] = videoGame.getName();
 			rows[1] = videoGame.getConsole();
 			rows[2] = videoGame.getCreditCost();
