@@ -83,9 +83,9 @@ public class CopyDAO extends DAO<Copy>{
 				VideoGame videoGame = new VideoGame(gameId, gameName, Cost, console);
 				
 				String pseudo = result.getString("User.Pseudo");
-				int PlayerId = result.getInt("User.Id");
+				int playerId = result.getInt("User.Id");
 				
-				User user = new Player(id, pseudo);
+				User user = new Player(playerId, pseudo);
 				
 				copys.add(new Copy(videoGame, (Player) user, id, available));
 			}

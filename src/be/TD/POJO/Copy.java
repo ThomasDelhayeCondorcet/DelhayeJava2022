@@ -76,7 +76,10 @@ public class Copy implements Serializable{
 	}
 	
 	public boolean IsAvailable() {
-		return false;
+		if(getAvailable()==1)
+			return true;
+		else
+			return false;
 	}
 
 	public boolean AddCopy(Copy copy) {
