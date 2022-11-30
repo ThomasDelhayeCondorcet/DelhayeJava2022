@@ -25,6 +25,7 @@ public class Player extends User implements Serializable{
 		this.email = email;
 		this.registrationDate = registrayionDate;
 		this.dateOfBirth = dateOfBirth;
+		this.adress = adress;
 	}
 	
 	public Player(String username, String password, String pseudo, LocalDate registrationDate,LocalDate dateOfBirth, String email, String adress ) {

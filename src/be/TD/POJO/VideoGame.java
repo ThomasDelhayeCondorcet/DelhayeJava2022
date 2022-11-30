@@ -84,7 +84,7 @@ public class VideoGame implements Serializable{
 	public static ArrayList<VideoGame> GetAll() {
 		DaoFactory daoFactory= new DaoFactory();
 		DAO<VideoGame> VideoGameDao = daoFactory.getVideoGameDAO();
-		return ((VideoGameDAO) VideoGameDao).findAll();
+		return VideoGameDao.findAll();
 	}
 
 	public boolean UpdateCost(VideoGame videoGame) {

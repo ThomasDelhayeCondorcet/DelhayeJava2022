@@ -57,7 +57,8 @@ public class VideoGameDAO extends DAO<VideoGame>{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Override
 	public ArrayList<VideoGame> findAll() {
 		ArrayList<VideoGame> games = new ArrayList<>();
 		String query ="Select * From VideoGame";

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import be.TD.POJO.Administrator;
 import be.TD.POJO.Player;
@@ -64,6 +65,12 @@ public class UserDAO extends DAO<User> {
 		catch(SQLException e){
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	@Override
+	public ArrayList<User> findAll() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

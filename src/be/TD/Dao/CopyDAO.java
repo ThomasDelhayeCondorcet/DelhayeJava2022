@@ -3,6 +3,7 @@ package be.TD.Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import be.TD.POJO.Copy;
 
@@ -55,6 +56,12 @@ public class CopyDAO extends DAO<Copy>{
 
 	@Override
 	public Copy find(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Copy> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

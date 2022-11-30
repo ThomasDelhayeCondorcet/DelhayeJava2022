@@ -1,6 +1,7 @@
 package be.TD.Dao;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import be.TD.POJO.Administrator;
 
@@ -31,6 +32,12 @@ public class AdministratorDAO extends DAO<Administrator> {
 
 	@Override
 	public Administrator find(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Administrator> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -3,6 +3,7 @@ package be.TD.Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import be.TD.POJO.Player;
 
@@ -60,6 +61,12 @@ public class PlayerDAO extends DAO<Player> {
 
 	@Override
 	public Player find(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Player> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

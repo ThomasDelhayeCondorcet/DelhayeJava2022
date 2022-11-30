@@ -1,6 +1,7 @@
 package be.TD.Dao;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import be.TD.POJO.Loan;
 
@@ -31,6 +32,12 @@ public class LoanDAO extends DAO<Loan>{
 
 	@Override
 	public Loan find(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Loan> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
