@@ -69,6 +69,17 @@ public class PlayerMainPage {
 		});
 		bt_add_copy.setBounds(10, 36, 121, 23);
 		frmPlayerMainPage.getContentPane().add(bt_add_copy);
+		
+		JButton bt_view_available_game = new JButton("View game");
+		bt_view_available_game.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViewGameAvailable next = new ViewGameAvailable(player);
+				JFrame nextFrame=next.frmAvailableGame;
+				ChangeFrame(nextFrame);
+			}
+		});
+		bt_view_available_game.setBounds(10, 70, 121, 23);
+		frmPlayerMainPage.getContentPane().add(bt_view_available_game);
 	}
 
 	public void ChangeFrame(Frame window){

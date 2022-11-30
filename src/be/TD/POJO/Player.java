@@ -36,6 +36,11 @@ public class Player extends User implements Serializable{
 		this.email = email;
 		this.adress = adress;
 	}
+	
+	public Player(int id, String pseudo ) {
+		super(id);
+		this.pseudo = pseudo;
+	}
 
 	public String getEmail() {
 		return email;

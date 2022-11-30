@@ -2,10 +2,15 @@ package be.TD.Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import be.TD.POJO.Copy;
+import be.TD.POJO.Player;
+import be.TD.POJO.User;
+import be.TD.POJO.VideoGame;
 
 public class CopyDAO extends DAO<Copy>{
 
@@ -62,7 +67,33 @@ public class CopyDAO extends DAO<Copy>{
 
 	@Override
 	public ArrayList<Copy> findAll() {
-		// TODO Auto-generated method stub
+		ArrayList<Copy> copys = new ArrayList<>();
+		String query = "Select * From Copy Inner join User On Copy.IdUser = User.Id Inner Join VideoGame on VideoGame.Id = Copy.IdGame";
+		
+		try{
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(query);
+			while(result.next()) {
+				int id = result.getInt("Copy.Id");
+				int available = result.getInt("Copy.Available");
+				
+				int gameId = result.getInt("VideoGame.Id");
+				String gameName = result.getString("VideoGame.Label");
+				String Cost = String.valueOf(result.getInt("VideoGame.Price"));
+				String console = result.getString("VideoGame.Console");
+				VideoGame videoGame = new VideoGame(gameId, gameName, Cost, console);
+				
+				String pseudo = result.getString("User.Pseudo");
+				int PlayerId = result.getInt("User.Id");
+				
+				User user = new Player(id, pseudo);
+				
+				copys.add(new Copy(videoGame, (Player) user, id, available));
+			}
+			return copys;
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 
