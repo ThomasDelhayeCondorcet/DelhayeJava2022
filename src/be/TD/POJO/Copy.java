@@ -22,6 +22,11 @@ public class Copy implements Serializable{
 		this.available = available;
 	}
 
+	public Copy(VideoGame videoGame, Player owner) {
+		this.videoGame = videoGame;
+		this.owner = owner;
+	}
+
 	public VideoGame getVideoGame() {
 		return videoGame;
 	}
