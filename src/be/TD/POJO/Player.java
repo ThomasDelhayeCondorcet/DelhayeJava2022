@@ -130,15 +130,7 @@ public class Player extends User implements Serializable{
 	public void setBorrow(ArrayList<Loan> borrow) {
 		this.borrow = borrow;
 	}
-
-	public boolean LoanAllowed() {
-		return false;
-	}
 	
-	public void AddBirthdayBonus() {
-		
-	}
-
 	public boolean UpdateCredit(Player player) {
 		DaoFactory daoFactory= new DaoFactory();
 		DAO<Player> playerDAO = daoFactory.getPlayerDAO();

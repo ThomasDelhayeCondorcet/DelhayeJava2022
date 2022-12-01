@@ -66,14 +66,7 @@ public class Copy implements Serializable{
 	public void setAvailable(int available) {
 		this.available = available;
 	}
-
-	public void ReleaseCopy() {
-		
-	}
 	
-	public void Borrow() {
-		
-	}
 	
 	public boolean IsAvailable() {
 		if(getAvailable()==1)

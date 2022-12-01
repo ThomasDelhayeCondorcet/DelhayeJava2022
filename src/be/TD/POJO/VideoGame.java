@@ -73,14 +73,6 @@ public class VideoGame implements Serializable{
 		this.copys = copys;
 	}
 
-	public Copy CopyAvailable() {
-		return null;
-    }
-    
-    public void SelectBooking() {
-    	
-    }
-
 	public static ArrayList<VideoGame> GetAll() {
 		DaoFactory daoFactory= new DaoFactory();
 		DAO<VideoGame> VideoGameDao = daoFactory.getVideoGameDAO();
