@@ -95,10 +95,6 @@ public class Loan implements Serializable{
 		this.copy = copy;
 	}
 
-	public void CalculateBalance() {
-		
-	}
-	
 	public void EndLoan(Loan loan) {
 		DaoFactory daoFactory= new DaoFactory();
 		DAO<Loan> loanDAO = daoFactory.getLoanDAO();
