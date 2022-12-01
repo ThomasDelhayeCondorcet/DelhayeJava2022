@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import be.TD.POJO.Administrator;
 import be.TD.POJO.VideoGame;
 
 import javax.swing.JButton;
@@ -23,6 +24,7 @@ import java.awt.Color;
 public class ModifyGameCost {
 
 	public JFrame frmModifyGamePage;
+	public Administrator admin;
 
 	/**
 	 * Launch the application.
@@ -44,6 +46,11 @@ public class ModifyGameCost {
 	 * Create the application.
 	 */
 	public ModifyGameCost() {
+		initialize();
+	}
+
+	public ModifyGameCost(Administrator admin) {
+		this.admin = admin;
 		initialize();
 	}
 
@@ -101,7 +108,7 @@ public class ModifyGameCost {
 					VideoGame videoGame = new VideoGame(id, name, newCerditCost, console);
 					
 					if(videoGame.UpdateCost(videoGame)) {
-						AdministratorMainPage next = new AdministratorMainPage();
+						AdministratorMainPage next = new AdministratorMainPage(admin);
 						JFrame nextFrame=next.frmAdministartorMainPage;
 						ChangeFrame(nextFrame);
 					}else {

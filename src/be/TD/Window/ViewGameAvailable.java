@@ -85,7 +85,7 @@ public class ViewGameAvailable {
 		for(Copy copy : copys) {
 			if(copy.IsAvailable() && copy.getOwner().getId() != player.getId()) {
 				Object rows[] = new Object[colName.length];
-				rows[0] = copy.getVideoGame().getId();
+				rows[0] = copy.getId();
 				rows[1] = copy.getVideoGame().getName();
 				rows[2] = copy.getVideoGame().getConsole();
 				rows[3] = copy.getVideoGame().getCreditCost();
