@@ -92,6 +92,12 @@ public class VideoGame implements Serializable{
 		DAO<VideoGame> VideoGameDao = daoFactory.getVideoGameDAO();
 		return VideoGameDao.update(videoGame);
 	}
+
+	public static VideoGame Find(int idGame) {
+		DaoFactory daoFactory= new DaoFactory();
+		DAO<VideoGame> VideoGameDao = daoFactory.getVideoGameDAO();
+		return VideoGameDao.find(idGame);
+	}
     
     
 	

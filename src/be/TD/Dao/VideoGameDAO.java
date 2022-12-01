@@ -54,7 +54,21 @@ public class VideoGameDAO extends DAO<VideoGame>{
 
 	@Override
 	public VideoGame find(int id) {
-		// TODO Auto-generated method stub
+		String query = "select * From VideoGame";
+		
+		try{
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(query);
+			if(result.first()) {
+				String name = result.getString("Label");
+				String cost = String.valueOf(result.getInt("Price"));
+				String console = result.getString("Console");
+				VideoGame videoGame = new VideoGame(id, name, cost, console);
+				return videoGame;
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 	

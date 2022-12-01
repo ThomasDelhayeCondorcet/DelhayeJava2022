@@ -80,6 +80,17 @@ public class PlayerMainPage {
 		});
 		bt_view_available_game.setBounds(10, 70, 121, 23);
 		frmPlayerMainPage.getContentPane().add(bt_view_available_game);
+		
+		JButton bt_view_loan = new JButton("View my Loan");
+		bt_view_loan.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViewCurrentLoan next = new ViewCurrentLoan(player);
+				JFrame nextFrame = next.frmCurrentLoan;
+				ChangeFrame(nextFrame);
+			}
+		});
+		bt_view_loan.setBounds(10, 104, 121, 23);
+		frmPlayerMainPage.getContentPane().add(bt_view_loan);
 	}
 
 	public void ChangeFrame(Frame window){

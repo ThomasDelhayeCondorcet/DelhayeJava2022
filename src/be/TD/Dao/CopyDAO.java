@@ -76,7 +76,26 @@ public class CopyDAO extends DAO<Copy>{
 
 	@Override
 	public Copy find(int id) {
-		// TODO Auto-generated method stub
+		String query = "Select * From Copy Where Id = '" + id + "' ";
+		
+		try {
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(query);
+			
+			if(result.first()){
+				int idGame = result.getInt("IdGame");
+				int idUser = result.getInt("IdUser");
+				int available = result.getInt("Available");
+				VideoGame videoGame = VideoGame.Find(idGame);
+				User owner = Player.Find(idUser);
+				Copy copy = new Copy(videoGame, (Player)owner, id, available);
+				return copy;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 
