@@ -116,7 +116,7 @@ public class LoaningPage {
 				Player lender = Player.Find(copy.getOwner().getId());
 				lender.setCredit(lender.getCredit()+total);
 				lender.UpdateCredit(lender);
-				
+				copy.setAvailable(0);
 				copy.UpdateAvailable(copy);
 				
 				PlayerMainPage next = new PlayerMainPage(player);

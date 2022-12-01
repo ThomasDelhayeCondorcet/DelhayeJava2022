@@ -99,8 +99,10 @@ public class Loan implements Serializable{
 		
 	}
 	
-	public void EndLoan() {
-		
+	public void EndLoan(Loan loan) {
+		DaoFactory daoFactory= new DaoFactory();
+		DAO<Loan> loanDAO = daoFactory.getLoanDAO();
+		loanDAO.update(loan);
 	}
 
 	public boolean Create(Loan loan) {

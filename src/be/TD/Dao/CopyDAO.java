@@ -56,7 +56,7 @@ public class CopyDAO extends DAO<Copy>{
 	@Override
 	public boolean update(Copy obj) {
 		boolean success = false;
-		String query = "Update Copy Set Available = '" + 0 + "' Where Id = '" + obj.getId() + "'";
+		String query = "Update Copy Set Available = '" + obj.getAvailable() + "' Where Id = '" + obj.getId() + "'";
 		
 		try {
 			PreparedStatement stmt = this.connect.prepareStatement(query);

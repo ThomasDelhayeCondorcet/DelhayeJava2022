@@ -74,7 +74,7 @@ public class ViewCurrentLoan {
 		};
 		myModel.setColumnIdentifiers(colName);
 		for(Loan loan : loans) {
-			if(loan.getBorrower().getId() == player.getId()) {
+			if(loan.getBorrower().getId() == player.getId() && loan.isOnGoing()) {
 				Object rows[] = new Object[colName.length];
 				rows[0] = loan.getId();
 				rows[1] = loan.getCopy().getVideoGame().getName();
@@ -104,6 +104,24 @@ public class ViewCurrentLoan {
 		frmCurrentLoan.getContentPane().add(bt_return);
 		
 		JButton bt_put_back = new JButton("Put back");
+		bt_put_back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = table.getSelectedRow();
+				int idSelected = (int) table.getModel().getValueAt(selectedRow, 0);
+				for(Loan loan : loans) {
+					if(idSelected == loan.getId()) {
+						loan.EndLoan(loan);
+						loan.getCopy().setAvailable(1);
+						Copy copy = loan.getCopy();
+						copy.setAvailable(1);
+						copy.UpdateAvailable(copy);
+						PlayerMainPage next = new PlayerMainPage(player);
+						JFrame nextFrame = next.frmPlayerMainPage;
+						ChangeFrame(nextFrame);
+					}
+				}
+			}
+		});
 		bt_put_back.setBounds(535, 327, 89, 23);
 		frmCurrentLoan.getContentPane().add(bt_put_back);
 	}

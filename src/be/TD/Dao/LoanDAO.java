@@ -55,7 +55,22 @@ public class LoanDAO extends DAO<Loan>{
 
 	@Override
 	public boolean update(Loan obj) {
-		// TODO Auto-generated method stub
+		boolean success = false;
+		String query = "Update Loan Set OnGoing = '0' Where Id = '" +obj.getId()+ "'";
+		
+		try {
+			PreparedStatement stmt = this.connect.prepareStatement(query);
+			
+			stmt.executeUpdate();
+			stmt.close();
+			success = true;
+			return success;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return false;
 	}
 
@@ -77,8 +92,13 @@ public class LoanDAO extends DAO<Loan>{
 				int id = result.getInt("Id");
 				LocalDate startDate = result.getDate("StartDate").toLocalDate();
 				LocalDate endDate = result.getDate("EndDate").toLocalDate();
-				if(result.getInt("OnGoing")==1);
-					boolean onGoing = true;
+				boolean onGoing;
+				if(result.getInt("OnGoing")==1) {
+					onGoing = true;
+				}
+				else {
+					onGoing = false;
+				}
 				int idCopy = result.getInt("IdCopy");
 				int idBorrower = result.getInt("IdBorrower");
 				int idLender = result.getInt("Copy.IdUser");
