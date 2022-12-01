@@ -55,7 +55,22 @@ public class CopyDAO extends DAO<Copy>{
 
 	@Override
 	public boolean update(Copy obj) {
-		// TODO Auto-generated method stub
+		boolean success = false;
+		String query = "Update Copy Set Available = '" + 0 + "' Where Id = '" + obj.getId() + "'";
+		
+		try {
+			PreparedStatement stmt = this.connect.prepareStatement(query);
+			
+			stmt.executeUpdate();
+			stmt.close();
+			success = true;
+			return success;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return false;
 	}
 

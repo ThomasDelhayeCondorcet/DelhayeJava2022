@@ -75,30 +75,29 @@ public class ViewGameAvailable {
 		frmAvailableGame.getContentPane().add(lb_error);
 		
 		ArrayList<Copy> copys = Copy.GetAll();
-		String[] colName = {"Name", "Console", "Price", "Owner"};
+		String[] colName = {"Id", "Name", "Console", "Price", "Owner"};
 		DefaultTableModel myModel = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
-				return true;
+				return false;
 			}
 		};
 		myModel.setColumnIdentifiers(colName);
 		for(Copy copy : copys) {
 			if(copy.IsAvailable() && copy.getOwner().getId() != player.getId()) {
 				Object rows[] = new Object[colName.length];
-				rows[0] = copy.getVideoGame().getName();
-				rows[1] = copy.getVideoGame().getConsole();
-				rows[2] = copy.getVideoGame().getCreditCost();
-				rows[3] = copy.getOwner().getPseudo();
+				rows[0] = copy.getVideoGame().getId();
+				rows[1] = copy.getVideoGame().getName();
+				rows[2] = copy.getVideoGame().getConsole();
+				rows[3] = copy.getVideoGame().getCreditCost();
+				rows[4] = copy.getOwner().getPseudo();
 				myModel.addRow(rows);
 			}
 		}
 		
 		JTable table = new JTable();
 		table.setModel(myModel);
-		table.setCellSelectionEnabled(true);
-		table.setRowSelectionAllowed(true);
-		table.setColumnSelectionAllowed(false);
-		table.setCellSelectionEnabled(false); 
+		table.setShowHorizontalLines(true);
+	    table.setRowSelectionAllowed(true);
 		scrollPane.setViewportView(table);
 		
 		JButton bt_return = new JButton("Return");
@@ -111,6 +110,23 @@ public class ViewGameAvailable {
 		});
 		bt_return.setBounds(10, 347, 89, 23);
 		frmAvailableGame.getContentPane().add(bt_return);
+		
+		JButton bt_confirm = new JButton("Select");
+		bt_confirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = table.getSelectedRow();
+				int idSelected = (int) table.getModel().getValueAt(selectedRow, 0);
+				for(Copy copy : copys) {
+					if(idSelected == copy.getId()) {
+						LoaningPage next = new LoaningPage(player, copy);
+						JFrame nextFrame = next.frmLoaningPage;
+						ChangeFrame(nextFrame);
+					}
+				}
+			}
+		});
+		bt_confirm.setBounds(535, 347, 89, 23);
+		frmAvailableGame.getContentPane().add(bt_confirm);
 	}
 
 	public void ChangeFrame(Frame window){

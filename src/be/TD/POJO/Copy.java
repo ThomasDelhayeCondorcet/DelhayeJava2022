@@ -93,4 +93,10 @@ public class Copy implements Serializable{
 		DAO<Copy> copyDao = daoFactory.getCopyDAO();
 		return copyDao.findAll();
 	}
+
+	public boolean UpdateAvailable(Copy copy) {
+		DaoFactory daoFactory= new DaoFactory();
+		DAO<Copy> copyDao = daoFactory.getCopyDAO();
+		return copyDao.update(copy);
+	}
 }

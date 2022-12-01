@@ -2,10 +2,13 @@ package be.TD.Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import be.TD.POJO.Player;
+import be.TD.POJO.User;
 
 public class PlayerDAO extends DAO<Player> {
 
@@ -55,13 +58,47 @@ public class PlayerDAO extends DAO<Player> {
 
 	@Override
 	public boolean update(Player obj) {
-		// TODO Auto-generated method stub
+		boolean success;
+		String query = "Update User Set Balance = '" + obj.getCredit() + "' Where Id = '" + obj.getId() + "'";
+		
+		try {
+			PreparedStatement stmt = this.connect.prepareStatement(query);
+			
+			stmt.executeUpdate();
+			stmt.close();
+			success = true;
+			return success;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return false;
 	}
 
 	@Override
 	public Player find(int id) {
-		// TODO Auto-generated method stub
+		
+		String query = "Select * from User Where Id = '" + id + "'";
+		
+		try {
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(query);
+			
+			if(result.first()){
+				String username = result.getString("UserName");
+				String pseudo = result.getString("Pseudo");
+				
+				int balance = result.getInt("Balance");
+				User player = new Player(id, pseudo, balance);
+				return (Player) player;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 
