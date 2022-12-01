@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import be.TD.Dao.DAO;
+import be.TD.Dao.DaoFactory;
+
 public class Player extends User implements Serializable{
 
 	private static final long serialVersionUID = -8384386959180789873L;
@@ -25,6 +28,7 @@ public class Player extends User implements Serializable{
 		this.email = email;
 		this.registrationDate = registrayionDate;
 		this.dateOfBirth = dateOfBirth;
+		this.adress = adress;
 	}
 	
 	public Player(String username, String password, String pseudo, LocalDate registrationDate,LocalDate dateOfBirth, String email, String adress ) {
@@ -34,6 +38,17 @@ public class Player extends User implements Serializable{
 		this.dateOfBirth = dateOfBirth;
 		this.email = email;
 		this.adress = adress;
+	}
+	
+	public Player(int id, String pseudo ) {
+		super(id);
+		this.pseudo = pseudo;
+	}
+	
+	public Player(int id, String pseudo, int credit) {
+		super(id);
+		this.pseudo = pseudo;
+		this.credit = credit;
 	}
 
 	public String getEmail() {
@@ -122,5 +137,18 @@ public class Player extends User implements Serializable{
 	
 	public void AddBirthdayBonus() {
 		
+	}
+
+	public boolean UpdateCredit(Player player) {
+		DaoFactory daoFactory= new DaoFactory();
+		DAO<Player> playerDAO = daoFactory.getPlayerDAO();
+		return playerDAO.update(player);
+		
+	}
+
+	public static Player Find(int id) {
+		DaoFactory daoFactory= new DaoFactory();
+		DAO<Player> playerDAO = daoFactory.getPlayerDAO();
+		return playerDAO.find(id);
 	}
 }

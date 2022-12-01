@@ -2,9 +2,15 @@ package be.TD.Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import be.TD.POJO.Copy;
+import be.TD.POJO.Player;
+import be.TD.POJO.User;
+import be.TD.POJO.VideoGame;
 
 public class CopyDAO extends DAO<Copy>{
 
@@ -49,13 +55,79 @@ public class CopyDAO extends DAO<Copy>{
 
 	@Override
 	public boolean update(Copy obj) {
-		// TODO Auto-generated method stub
+		boolean success = false;
+		String query = "Update Copy Set Available = '" + obj.getAvailable() + "' Where Id = '" + obj.getId() + "'";
+		
+		try {
+			PreparedStatement stmt = this.connect.prepareStatement(query);
+			
+			stmt.executeUpdate();
+			stmt.close();
+			success = true;
+			return success;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return false;
 	}
 
 	@Override
 	public Copy find(int id) {
-		// TODO Auto-generated method stub
+		String query = "Select * From Copy Where Id = '" + id + "' ";
+		
+		try {
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(query);
+			
+			if(result.first()){
+				int idGame = result.getInt("IdGame");
+				int idUser = result.getInt("IdUser");
+				int available = result.getInt("Available");
+				VideoGame videoGame = VideoGame.Find(idGame);
+				User owner = Player.Find(idUser);
+				Copy copy = new Copy(videoGame, (Player)owner, id, available);
+				return copy;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public ArrayList<Copy> findAll() {
+		ArrayList<Copy> copys = new ArrayList<>();
+		String query = "Select * From Copy Inner join User On Copy.IdUser = User.Id Inner Join VideoGame on VideoGame.Id = Copy.IdGame";
+		
+		try{
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(query);
+			while(result.next()) {
+				int id = result.getInt("Copy.Id");
+				int available = result.getInt("Copy.Available");
+				
+				int gameId = result.getInt("VideoGame.Id");
+				String gameName = result.getString("VideoGame.Label");
+				String Cost = String.valueOf(result.getInt("VideoGame.Price"));
+				String console = result.getString("VideoGame.Console");
+				VideoGame videoGame = new VideoGame(gameId, gameName, Cost, console);
+				
+				String pseudo = result.getString("User.Pseudo");
+				int playerId = result.getInt("User.Id");
+				
+				User user = new Player(playerId, pseudo);
+				
+				copys.add(new Copy(videoGame, (Player) user, id, available));
+			}
+			return copys;
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 

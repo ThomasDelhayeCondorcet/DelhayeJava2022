@@ -1,6 +1,7 @@
 package be.TD.Dao;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import be.TD.POJO.Booking;
 
@@ -31,6 +32,12 @@ public class BookingDAO extends DAO<Booking>{
 
 	@Override
 	public Booking find(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Booking> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
